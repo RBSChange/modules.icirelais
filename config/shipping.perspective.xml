@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<perspective>
+	<models>
+		<updatemodel name="modules_generic/rootfolder">
+			<addchild model="modules_icirelais/icirelaismode" />
+			<adddrop model="modules_icirelais/icirelaismode" action="move" />
+			<addcontextaction name="createIcirelaisMode" group="create_" before="" />
+		</updatemodel>
+		<updatemodel name="modules_generic/folder">
+			<addchild model="modules_icirelais/icirelaismode" />
+			<adddrop model="modules_icirelais/icirelaismode" action="move" />
+			<addcontextaction name="createIcirelaisMode" group="create_" before="" />
+		</updatemodel>
+		<model name="modules_icirelais/icirelaismode">
+			<contextactions>
+				<contextaction name="edit"/>
+				<contextaction name="delete"/>
+				<contextaction name="deactivated"/>
+				<contextaction name="reactivate"/>
+			</contextactions>
+		</model>
+	</models>
+	<actions>
+		<action name="createIcirelaisMode" single="true" permission="Insert_icirelaismode" icon="add" 
+			label="&amp;modules.icirelais.bo.actions.Createicirelaismode;"/>
+	</actions>
+</perspective>
