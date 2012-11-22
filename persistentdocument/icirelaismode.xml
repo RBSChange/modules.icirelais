@@ -4,5 +4,6 @@
 	xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/static/schema/change-document/3.5.xsd"
 	model-version="3.5" has-url="false" use-rewrite-url="false" icon="shipping" extend="modules_shipping/mode">
 	<properties>
+		<add name="trackingUrl" default-value="http://e-trace.ils-consult.fr/ici-webtrace/webclients.aspx?sdg_landnr={1}&amp;sdg_mandnr={2}&amp;sdg_lfdnr={3}&amp;cmd=SDG_SEARCH_EXACT"/>	
 	</properties>
 </document>
