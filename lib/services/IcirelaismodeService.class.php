@@ -61,7 +61,6 @@ class icirelais_IcirelaismodeService extends shipping_RelayModeService
 	{
 		return array('icirelais', 'IcirelaisModeConfiguration');
 	}
-	
 	protected function getDetailExpeditionPageTagName()
 	{
 		return 'contextual_website_website_modules_icirelais_icirelaisexpedition';
@@ -100,7 +99,6 @@ class icirelais_IcirelaismodeService extends shipping_RelayModeService
 	 */
 	public function getRelayFromXml($item)
 	{
-		
 		$relay = new shipping_Relay();
 		
 		$childList = $item->childNodes;
@@ -184,11 +182,9 @@ class icirelais_IcirelaismodeService extends shipping_RelayModeService
 					$relay->setOpeningHours($this->extractOpeningHour($child));
 					break;
 			}
-		
 		}
 		
 		return $relay;
-	
 	}
 	
 	/**
@@ -232,7 +228,8 @@ class icirelais_IcirelaismodeService extends shipping_RelayModeService
 			
 			if (!isset($hoursByDay[$day]))
 			{
-				$hoursByDay[$day] = $ls->transFO('m.shipping.general.opening-hours', array('ucf'), array('hour1' => $start, 'hour2' => $end));
+				$hoursByDay[$day] = $ls->transFO('m.shipping.general.opening-hours', array('ucf'), array('hour1' => $start, 
+					'hour2' => $end));
 			}
 			else
 			{
@@ -240,7 +237,6 @@ class icirelais_IcirelaismodeService extends shipping_RelayModeService
 					'hour1' => $start, 'hour2' => $end));
 				$hoursByDay[$day] = $hoursByDay[$day] . $timeSpan;
 			}
-		
 		}
 		
 		for ($i = 0; $i < 7; $i++)
@@ -253,5 +249,4 @@ class icirelais_IcirelaismodeService extends shipping_RelayModeService
 		
 		return $hoursByDay;
 	}
-
 }

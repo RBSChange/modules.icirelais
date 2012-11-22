@@ -5,7 +5,10 @@
  */
 class icirelais_BlockIcirelaisModeConfigurationAction extends shipping_BlockRelayModeConfigurationAction
 {
-	
+	/**
+	 * Return the list of shipping_Relay
+	 * @return shipping_Relay[]|null
+	 */
 	protected function buildRelayList()
 	{
 		$relays = array();

@@ -5,7 +5,9 @@
  */
 class icirelais_BlockExpeditionDetailAction extends shipping_BlockExpeditionDetailAction
 {
-	
+	/**
+	 * Initialize $this->param
+	 */
 	protected function init()
 	{
 		$shippingAdress = $this->expedition->getAddress();
@@ -20,6 +22,9 @@ class icirelais_BlockExpeditionDetailAction extends shipping_BlockExpeditionDeta
 	
 	}
 	
+	/**
+	 * @return shipping_Relay
+	 */
 	protected function getRelayDetail()
 	{
 		$relay = null;
@@ -41,16 +46,15 @@ class icirelais_BlockExpeditionDetailAction extends shipping_BlockExpeditionDeta
 		return $relay;
 	}
 	
+	/**
+	 * @param string $trackingNumber
+	 * @return array
+	 */
 	protected function getTrackingDetail($trackingNumber)
 	{
 		// 		$url = $this->param['trackingUrl'] . '?dspid=' . $this->param['dspId'] . '&countryid=' . $this->param['countryCode'] . '&language=' . $this->param['lang'] . '&dspparcelid=' . $trackingNumber;
-		
-
 		// 		$result['trackingUrl'] = $url;
-		
-
 		// 		return $result;
 		return array();
 	}
-
 }
