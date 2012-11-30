@@ -17,21 +17,28 @@ class icirelais_BlockIcirelaisModeConfigurationAction extends shipping_BlockRela
 		$dateFormString = date_Formatter::format($dateFrom, 'd/m/Y');
 		$requestId = uniqid($dateFrom->getTimestamp());
 		
-		$webserviceUrl = Framework::getConfigurationValue('modules/icirelais/webserviceUrl');;
+		$webserviceUrl = Framework::getConfigurationValue('modules/icirelais/webserviceUrl');
 		
 		$url = $webserviceUrl . '/GetPudoList?address=' . urlencode($this->param['address']) . '&zipCode=' . $this->param['zipcode'] . '&city=' . $this->param['city'] . '&request_id=' . $requestId . '&date_from=' . $dateFormString;
 		
 		$httpClient = HTTPClientService::getInstance()->getNewHTTPClient();
 		$xml = $httpClient->get($url);
 		
-		$doc = f_util_DOMUtils::fromString($xml);
-		$items = $doc->documentElement->lastChild->childNodes;
-		
-		for ($i = 0; $i < $items->length; $i++)
+		try
 		{
-			$relay = icirelais_IcirelaismodeService::getInstance()->getRelayFromXml($items->item($i));
-			$relay->setCountryCode($this->param['countryCode']);
-			$relays[] = $relay;
+			$doc = f_util_DOMUtils::fromString($xml);
+			$items = $doc->documentElement->lastChild->childNodes;
+			
+			for ($i = 0; $i < $items->length; $i++)
+			{
+				$relay = icirelais_IcirelaismodeService::getInstance()->getRelayFromXml($items->item($i));
+				$relay->setCountryCode($this->param['countryCode']);
+				$relays[] = $relay;
+			}
+		}
+		catch (Exception $e)
+		{
+			Framework::exception($e);
 		}
 		
 		return $relays;

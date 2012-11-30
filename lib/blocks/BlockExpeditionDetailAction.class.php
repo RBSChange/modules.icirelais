@@ -34,13 +34,20 @@ class icirelais_BlockExpeditionDetailAction extends shipping_BlockExpeditionDeta
 		$httpClient = HTTPClientService::getInstance()->getNewHTTPClient();
 		$xml = $httpClient->get($url);
 		
-		$doc = f_util_DOMUtils::fromString($xml);
-		$items = $doc->documentElement->lastChild->childNodes;
-		
-		if ($items->length > 0)
+		try
 		{
-			$relay = icirelais_IcirelaismodeService::getInstance()->getRelayFromXml($items->item(0));
-			$relay->setCountryCode($this->param['countryCode']);
+			$doc = f_util_DOMUtils::fromString($xml);
+			$items = $doc->documentElement->lastChild->childNodes;
+			
+			if ($items->length > 0)
+			{
+				$relay = icirelais_IcirelaismodeService::getInstance()->getRelayFromXml($items->item(0));
+				$relay->setCountryCode($this->param['countryCode']);
+			}
+		}
+		catch (Exception $e)
+		{
+			Framework::exception($e);
 		}
 		
 		return $relay;
@@ -52,9 +59,6 @@ class icirelais_BlockExpeditionDetailAction extends shipping_BlockExpeditionDeta
 	 */
 	protected function getTrackingDetail($trackingNumber)
 	{
-		// 		$url = $this->param['trackingUrl'] . '?dspid=' . $this->param['dspId'] . '&countryid=' . $this->param['countryCode'] . '&language=' . $this->param['lang'] . '&dspparcelid=' . $trackingNumber;
-		// 		$result['trackingUrl'] = $url;
-		// 		return $result;
 		return array();
 	}
 }
